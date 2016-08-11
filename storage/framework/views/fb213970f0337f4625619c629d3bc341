@@ -1,0 +1,41 @@
+<?php $__env->startSection('content'); ?>
+
+<section class="content">
+<div class="box box-primary">
+
+<div class="box-header"><h1>Tambah Suplier</h1></div> 	
+<div class="box-body">
+      <div class="col-md-9">
+				<?php echo Form::open(['route'=>'suplier.store','method'=>'post','class'=>'form-horizontal']); ?>
+
+			 		<?php echo csrf_field(); ?>
+
+			<div class="form-group">
+				<div class="row"> 
+					
+				</div>	  
+				  Nama Suplier :<?php echo Form::text('namaSuplier',null,array('class'=>'form-control')); ?>
+
+				  Alamat Suplier :<?php echo Form::textarea('alamatSuplier',null,array('class'=>'form-control')); ?>
+
+				  Telpon Suplier :
+			  <div class="input-group col-md-3">
+			  		<?php echo Form::text('telpSuplier',null,array('class'=>'form-control')); ?>
+
+			  </div>
+			  <br>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+       			 <button type="submit" class="btn btn-primary">Simpan</button>
+			</div>
+		<?php echo Form::close(); ?>
+
+		</div>
+     </div>
+	  </div>
+</section>
+   
+<script src="<?php echo e(asset('/lib/angular/angular.min.js')); ?>" type="text/javascript"></script>   
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

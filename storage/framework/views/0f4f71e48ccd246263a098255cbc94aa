@@ -1,0 +1,13 @@
+
+
+				  ID USer:<?php echo Form::text('userId',null,array('class'=>'form-control','id'=>'userId')); ?>
+
+				  Nama User :<?php echo Form::text('namaUser',null,array('class'=>'form-control','id'=>'namaUser')); ?>
+
+				  Password:<?php echo Form::password('password',array('class'=>'form-control','id'=>'password')); ?>
+
+				  Password Confirmation:<?php echo Form::password('password_confirmation',array('class'=>'form-control','id'=>'password_confirmation')); ?>
+
+				  Role :<?php echo Form::select('role',App\Role::lists('namaRole','namaRole'),null,['class'=>'form-control','id'=>'namaRole']); ?>
+
+				  <input type="file" name="foto" id="foto"></input>

@@ -1,0 +1,122 @@
+<?php $__env->startSection('content'); ?>
+
+<section class="content">
+<div class="box box-primary">
+
+<div class="box-header"><h1>Tambah Role</h1></div> 	
+<div class="box-body">
+      <div class="col-md-9">
+				<?php echo Form::open(['method'=>'post','class'=>'form-horizontal']); ?>
+
+			 		<?php echo csrf_field(); ?>
+
+			<div class="form-group">
+				<div class="row"> 
+					
+				</div>	  
+				<?php if(count($errors) > 0): ?>
+    <div class="alert alert-danger">
+        <ul>
+            <?php foreach($errors->all() as $error): ?>
+                <li><?php echo e($error); ?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+
+Nama Role: <?php echo Form::text('role',null,['class'=>'form-control']); ?><br/>
+
+<?php $prm=App\Permission::all(); ?>
+	<?php foreach($prm as $pr): ?>
+		<input type="checkbox" name="permission[]" value="<?php echo $pr->namaPermission; ?>"><?php echo $pr->namaPermission; ?><br/>
+	<?php endforeach; ?>
+
+	<!-- <table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Nama</th>
+				<th colspan="4" align="center"><center/> Permission</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>User</th>
+				<td><input type="checkbox" name="akses[]" value="user.create">create</td>
+				<td><input type="checkbox" name="akses[]" value="user.update">update</td>
+				<td><input type="checkbox" name="akses[]" value="user.delete">delete</td>
+				<td><input type="checkbox" name="akses[]" value="user.view">view</td>
+			</tr>
+			<tr>
+				<td>Pelanggan</td>
+				<td><input type="checkbox" name="akses[]">create</td>
+				<td><input type="checkbox" name="akses[]">update</td>
+				<td><input type="checkbox" name="akses[]">delete</td>
+				<td><input type="checkbox" name="akses[]">view</td>
+			</tr>
+			<tr>
+				<td>Suplier</td>
+				<td><input type="checkbox" name="akses[]">create</td>
+				<td><input type="checkbox" name="akses[]">update</td>
+				<td><input type="checkbox" name="akses[]">delete</td>
+				<td><input type="checkbox" name="akses[]">view</td>
+			</tr>
+			<tr>
+				<th>Barang</th>
+				<td><input type="checkbox" name="akses[]">create</td>
+				<td><input type="checkbox" name="akses[]">update</td>
+				<td><input type="checkbox" name="akses[]">delete</td>
+				<td><input type="checkbox" name="akses[]">view</td>
+			</tr>
+			<tr>
+				<td>Permission</td>
+				<td><input type="checkbox" name="akses[]">create</td>
+				<td><input type="checkbox" name="akses[]">update</td>
+				<td><input type="checkbox" name="akses[]">delete</td>
+				<td><input type="checkbox" name="akses[]">view</td>
+			</tr>
+			<tr>
+				<td>Penjualan</td>
+				<td><input type="checkbox" name="akses[]">create</td>
+				<td></td>
+				<td><input type="checkbox" name="akses[]">delete</td>
+				<td><input type="checkbox" name="akses[]">view</td>
+			</tr>
+			<tr>
+				<td>Pembelian</td>
+				<td><input type="checkbox" name="akses[]">create</td>
+				<td></td>
+				<td><input type="checkbox" name="akses[]">delete</td>
+				<td><input type="checkbox" name="akses[]">view</td>
+			</tr>
+			<tr>
+				<th>Laporan</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input type="checkbox" name="akses[]" value="laporan.view">view</td>
+			</tr>
+			<tr>
+				<th>Grafik</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><input type="checkbox" name="akses[]" value="chart.view">view</td>
+			</tr>
+		</tbody>
+	</table> -->
+			  <br>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+       			 <button type="submit" class="btn btn-primary">Simpan</button>
+			</div>
+		<?php echo Form::close(); ?>
+
+		</div>
+     </div>
+	  </div>
+</section>
+   
+<script src="<?php echo e(asset('/lib/angular/angular.min.js')); ?>" type="text/javascript"></script>   
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
