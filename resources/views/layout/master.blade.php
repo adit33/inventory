@@ -16,12 +16,12 @@
 
     <link href="{{asset('/lib/datepicker/dist/css/bootstrap-datepicker.css')}}" rel="stylesheet" />
 
+    <link href="{{asset('/lib/datatables/media/css/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="{{asset('/lib/datatables/buttons/css/buttons.dataTables.css')}}" rel="stylesheet" /> 
 
     <link href="{{asset('/lib/datatables/media/css/buttons.bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 
-    <link href="{{asset('/lib/datatables/media/css/dataTables.bootstrap.css')}}" rel="stylesheet" type="text/css" />
     <!-- <link href="{{asset('/lib/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css" /> -->
   </head>
   <body class="skin-blue sidebar-mini">
@@ -84,9 +84,9 @@
     
     <script src="{{asset('/lib/dist/js/demo.js')}}" type="text/javascript"></script>
     
-    <script src="{{asset('/lib/datatables/media/js/jquery.dataTables.min.js')}}" type="text/javascript"></script> 
     
-    <!-- <script src="{{asset('/lib/datatables/buttons/js/dataTables.buttons.js')}}" type="text/javascript"></script>  -->
+    <script src="{{asset('/lib/datatables/buttons/js/dataTables.buttons.js')}}" type="text/javascript"></script> 
+    <script src="{{asset('/lib/datatables/media/js/jquery.dataTables.min.js')}}" type="text/javascript"></script> 
     
     <script src="{{asset('/lib/datatables/buttons/js/buttons.bootstrap.js')}}" type="text/javascript"></script>
     
