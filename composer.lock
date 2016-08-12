@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b2a3c81de46fd6e557acaa6d93fd9087",
-    "content-hash": "43f675bc002d95b70687a13850b6f404",
+    "hash": "4ff384a4467a9e6c0fd50a8954a9aca9",
+    "content-hash": "50c191de1c7cf63c033b9e82b666db12",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -359,6 +359,61 @@
             "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
             "homepage": "https://github.com/dompdf/dompdf",
             "time": "2015-12-07 04:07:13"
+        },
+        {
+            "name": "genealabs/phpgmaps",
+            "version": "0.3.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/GeneaLabs/Phpgmaps.git",
+                "reference": "d258433d0491226597e7cd62b7ca388c35afe943"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/GeneaLabs/Phpgmaps/zipball/d258433d0491226597e7cd62b7ca388c35afe943",
+                "reference": "d258433d0491226597e7cd62b7ca388c35afe943",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "5.*",
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-laravel4": "1.0-dev",
+                    "dev-develop": "2.0-dev",
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GeneaLabs\\Phpgmaps\\": "src/GeneaLabs/Phpgmaps/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike Bronner",
+                    "email": "mike@genealabs.com",
+                    "role": "maintainer"
+                },
+                {
+                    "name": "Michael Hopkins",
+                    "role": "developer"
+                }
+            ],
+            "description": "Laravel implementation of BIOSTALL's CodeIgniter Google Maps API, originally by Michael Hopkins at Appitventures.",
+            "keywords": [
+                "biostall",
+                "googlemaps",
+                "laravel",
+                "phpgmaps"
+            ],
+            "time": "2016-08-07 20:39:00"
         },
         {
             "name": "gloudemans/shoppingcart",

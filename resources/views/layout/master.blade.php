@@ -92,6 +92,7 @@
     
     <script src="{{asset('/lib/datatables/media/js/dataTables.bootstrap.js')}}" type="text/javascript"></script>     
 
+    <script type="text/javascript" src="{{ asset('lib/Chart.js') }}"></script>
     @stack('scripts')  
 
   </body>

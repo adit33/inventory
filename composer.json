@@ -13,7 +13,8 @@
         "Yajra/laravel-datatables-oracle":"~6.0",
         "barryvdh/laravel-debugbar":"~2.0.6",
         "barryvdh/laravel-dompdf": "0.6.*",
-        "intervention/image":"dev-master"
+        "intervention/image":"dev-master",
+        "genealabs/phpgmaps": "~0.3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

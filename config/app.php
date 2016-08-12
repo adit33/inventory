@@ -139,6 +139,7 @@ return [
          Yajra\Datatables\DatatablesServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        GeneaLabs\Phpgmaps\PhpgmapsServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -205,6 +206,7 @@ return [
         'Cart'      => Gloudemans\Shoppingcart\Facades\Cart::class,
         'PDF'       => Barryvdh\DomPDF\Facade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
+        'Gmaps'     => 'GeneaLabs\Phpgmaps\Facades\PhpgmapsFacade',
     ],
 
 ];

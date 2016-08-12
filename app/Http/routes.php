@@ -13,7 +13,33 @@
 use App\permission;
 
 Route::get('/', function () {
-    return view('welcome');
+	$lokasis=DB::table('lokasi')->get();
+    $config = array();
+    $config['zoom'] = 'auto';
+    $config['center'] = 'auto';
+    $config['onboundschanged'] = 'if (!centreGot) {
+            var mapCentre = map.getCenter();
+            marker_0.setOptions({
+                position: new google.maps.LatLng(mapCentre.lat(), mapCentre.lng())
+            });
+        }
+        centreGot = true;';
+
+    Gmaps::initialize($config);
+
+    // set up the marker ready for positioning
+    // once we know the users location
+
+    foreach ($lokasis as $lokasi) {
+    	$marker = array();
+    	$marker['position']=$lokasi->lat.','.$lokasi->lang;
+    	$marker['infowindow_content']=$lokasi->nama."<hr><strong>Alamat : parung halang<br><strong>Kode Pos : </strong> 40375 <br><strong>Telp : </strong> 089656234771";
+    	Gmaps::add_marker($marker);
+    }
+
+    $map = Gmaps::create_map();
+    echo "<html><head>
+<script type='text/javascript'>var centreGot = false;</script>".$map['js']."</head><body>".$map['html']."</body></html>";
 });
 Route::get('login',array('uses'=>'UserController@login'));
 Route::POST('login',array('uses'=>'UserController@doLogin'));
@@ -30,10 +56,7 @@ Route::PUT('role/update',['uses'=>'RoleController@update','as'=>'role.update']);
 
 Route::get('permission/create',['uses'=>'PermissionController@create']);
 
-Route::get('user/create',['uses'=>'UserController@create']);
-Route::POST('user/store',['uses'=>'UserController@store','as'=>'user.store']);
-Route::get('user/edit/{id}',['uses'=>'UserController@edit','as'=>'user.edit']);
-Route::POST('user/update/{id}',['uses'=>'UserController@update','as'=>'user.update']);
+Route::resource('user','UserController');
 
 Route::get('api/barang',array('uses'=>'BarangController@apiBarang'));
 Route::get('barang',['uses'=>'BarangController@index']);

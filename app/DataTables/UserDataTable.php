@@ -4,7 +4,9 @@ namespace App\DataTables;
 
 use App\User;
 use Yajra\Datatables\Services\DataTable;
-
+use URL;
+use Crypt;
+use Form;
 class UserDataTable extends DataTable
 {
     /**
@@ -14,9 +16,20 @@ class UserDataTable extends DataTable
      */
     public function ajax()
     {
+        $query=$this->query();
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'path.to.action.view')
+             ->addColumn('action', function($query){
+               return '<a href="'.URL::to("user/edit/".Crypt::encrypt($query->userId)).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>'
+            .Form::open([
+            "method" => "DELETE",
+            "id"=>"form-delete",
+            "route" => ["user.destroy", $query->userId],
+            "style" => "display:inline"
+            ]).'
+            <button class="btn btn-xs btn-danger" type="button" data-toggle="modal" data-target="#myModal" data-title="Delete User" data-message="Are you sure you want to delete this user ?"> <i class="glyphicon glyphicon-trash"></i> Delete
+            </button>'
+            .Form::close().'';}) 
             ->make(true);
     }
 
@@ -42,7 +55,7 @@ class UserDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '150px'])
                     ->parameters($this->getBuilderParameters());
     }
 

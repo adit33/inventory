@@ -21,7 +21,7 @@ Notifikasi
                   <h3 class="box-title">Data Barang</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <?php echo $dataTable->table(['class'=>"dataTables_wrapper form-inline dt-bootstrap no-footer"]); ?>
+                  <?php echo $dataTable->table(); ?>
 
                 </div><!-- /.box-body -->
               </div><!-- /.box -->          
@@ -45,7 +45,7 @@ Notifikasi
       <div class="col-md-9">
       <div class="modal-body">
         
-        <?php echo Form::open(['ng-submit'=>'addBarang($event)','class'=>'form-horizontal']); ?>
+        <?php echo Form::open(['class'=>'form-horizontal']); ?>
 
           <?php echo csrf_field(); ?>
 
