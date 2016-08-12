@@ -10,6 +10,7 @@ use Auth;
 use App\User;
 use Session;
 use Image;
+use App\DataTables\UserDataTable;
 
 class UserController extends Controller
 {
@@ -18,10 +19,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UserDataTable $dataTable)
     {
         $users=User::all();
-        return View('user.create',['users'=>$users]);
+        return $dataTable->render('user.index');
     }
 
     /**
@@ -29,6 +30,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         $users=User::all();
