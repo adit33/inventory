@@ -1,10 +1,10 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use App\Lokasi;
 use App\Http\Controllers\Controller;
 
 class LokasiController extends Controller
@@ -26,7 +26,7 @@ class LokasiController extends Controller
      */
     public function create()
     {
-        //
+        return View('lokasi.create');
     }
 
     /**
@@ -37,7 +37,13 @@ class LokasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Lokasi::create([
+                'nama'=>$request->input('nama'),
+                'lat'=>$request->input('lat'),
+                'lang'=>$request->input('lang')
+            ]);
+
+        return redirect()->back();
     }
 
     /**

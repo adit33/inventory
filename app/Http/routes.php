@@ -58,6 +58,10 @@ Route::get('permission/create',['uses'=>'PermissionController@create']);
 
 Route::resource('user','UserController');
 
+Route::resource('lokasi','LokasiController');
+
+Route::get('subkelompok',['uses'=>'SubKelompokController@index','as'=>'sub.index']);
+
 Route::get('api/barang',array('uses'=>'BarangController@apiBarang'));
 Route::get('barang',['uses'=>'BarangController@index']);
 Route::POST('barang/store',array('uses'=>'BarangController@store'));
