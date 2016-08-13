@@ -26,7 +26,7 @@ class PeminjamanController extends Controller
      */
     public function create()
     {
-        //
+        return View('peminjaman.create');
     }
 
     /**

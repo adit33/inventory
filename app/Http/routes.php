@@ -62,6 +62,8 @@ Route::resource('lokasi','LokasiController');
 
 Route::get('subkelompok',['uses'=>'SubKelompokController@index','as'=>'sub.index']);
 
+Route::get('peminjaman/create',['uses'=>'PeminjamanController@create','as'=>'peminjaman.create']);
+
 Route::get('api/barang',array('uses'=>'BarangController@apiBarang'));
 Route::get('barang',['uses'=>'BarangController@index']);
 Route::POST('barang/store',array('uses'=>'BarangController@store'));
