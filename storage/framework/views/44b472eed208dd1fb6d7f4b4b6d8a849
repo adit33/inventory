@@ -1,0 +1,5 @@
+Nama : <?php echo Form::text('nama',null,['class'=>'form-control']); ?>
+
+Latitude :<?php echo Form::text('lat',null,['class'=>'form-control']); ?>
+
+Langitude :<?php echo Form::text('lang',null,['class'=>'form-control']); ?>

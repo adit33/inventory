@@ -1,0 +1,27 @@
+
+ 	<link rel="stylesheet" href="<?php echo e(asset('/uikit/css/uikit.almost-flat.min.css')); ?>" />
+	
+	Laporan Penjualan dari tgl <?php echo $tgl1; ?> sampai <?php echo $tgl2; ?>
+
+
+	<table class="uk-table uk-table-striped">
+					<thead>
+						<tr>
+						<th>No Faktur</th>
+						<th>Nama Pelanggan</th>
+						<th>Tanggal</th>
+					
+					</tr>
+					
+					</thead>
+					<tbody>	
+					<?php foreach($datas as $data): ?>
+					<tr>
+						<td><?php echo $data->kodeJual; ?></td>
+						<td><?php echo $data->r_pelanggan->namaPelanggan; ?></td>
+						<td><?php echo $data->tgl; ?></td>
+					
+					</tr>
+					<?php endforeach; ?>
+					</tbody>	
+	</table>
