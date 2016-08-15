@@ -64,6 +64,10 @@ Route::get('subkelompok',['uses'=>'SubKelompokController@index','as'=>'sub.index
 
 Route::get('peminjaman/create',['uses'=>'PeminjamanController@create','as'=>'peminjaman.create']);
 
+Route::get('get_id_sub_kelompok',['uses'=>'SubKelompokController@getSubKelompok','as'=>'subkelompok.getid']);
+
+Route::get('get_data_sub_kelompok',['uses'=>'SubKelompokController@getDataSubKelompok','as'=>'subkelompok.getdata']);
+
 Route::get('api/barang',array('uses'=>'BarangController@apiBarang'));
 Route::get('barang',['uses'=>'BarangController@index']);
 Route::POST('barang/store',array('uses'=>'BarangController@store'));

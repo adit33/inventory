@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\DataTables\SubKelompokDataTable;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
+use App\SubKelompok;
 
 class SubKelompokController extends Controller
 {
@@ -84,5 +86,21 @@ class SubKelompokController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getSubKelompok(Request $request)
+    {
+        $idSub=DB::table('subKelompok')
+            ->where('kelompok_kode','=',$request->id_kelompok)
+            ->get();
+
+        return $idSub;
+    }
+
+    public function getDataSubKelompok(Request $request)
+    {
+        $subKelompok=SubKelompok::find($request->id_sub);
+
+        return $subKelompok;
     }
 }
