@@ -27,10 +27,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo e(URL::to('/user/create')); ?>"><i class="fa fa-circle-o"></i>User</a></li>
-                <li><a href="<?php echo e(URL::to('/barang')); ?>"><i class="fa fa-circle-o"></i>Barang</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>Suplier</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>Pelanggan</a></li>
+                <li><a href="<?php echo e(URL::to('user')); ?>"><i class="fa fa-circle-o"></i>User</a></li>
+                <li><a href="<?php echo e(URL::to('subkelompok')); ?>"><i class="fa fa-circle-o"></i>Barang</a></li>
+                <li><a href="<?php echo e(URL::to('/')); ?>"><i class="fa fa-circle-o"></i>Lokasi</a></li>
               </ul>
             </li>
 
@@ -41,8 +40,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo e(URL::to('/penjualan')); ?>"><i class="fa fa-circle-o"></i>Peminjaman</a></li>
-                <li><a href="<?php echo e(URL::to('/barang')); ?>"><i class="fa fa-circle-o"></i>Pengembalian</a></li>
+                <li><a href="<?php echo e(URL::to('/peminjaman/create')); ?>"><i class="fa fa-circle-o"></i>Peminjaman</a></li>
               </ul>
             </li>
             <li class="treeview">

@@ -7,24 +7,29 @@
 			<div class="form-group">
 				<div class="col-sm-12">
 					
-					<div class="col-sm-6">
+					<div class="col-md-6">
 					Kelompok :{!! Form::select('id_kelompok',App\Kelompok::lists('nama_kelompok','id_kelompok'),null,['class'=>'form-control js-example-basic-single','id'=>'id_kelompok','placeholder'=>'Pilih']) !!} <br>
 					</div>
 
-					<div class="col-sm-4">
+					<div class="col-md-4">
 					Sub Kelompok :{!! Form::select('id_sub',[],null,['id'=>'id_sub','class'=>'form-control js-example-basic-single','placeholder'=>'Pilih']) !!} <br>
 					</div>
 
-					<div id="stok" class="col-sm-2">
+					<div id="stok" class="col-md-2">
 	
 					</div>
 
-					<div class="col-sm-6">
+					<div class="col-md-6">
 					Peminjam : {!! Form::select('id',App\Lokasi::lists('nama','id'),null,['class'=>'form-control js-example-basic-single','placeholder'=>'']) !!}
 					</div>
 					
-					<div class="col-sm-2">
+					<div class="col-md-2">
 					Jumlah :{!! Form::text('jumlah',null,['class'=>'form-control']) !!}
+					</div>
+
+					<div class="col-md-2">
+					<button class="btn btn-info" type="submit" id="append" name="append">Tambah Barang</button>
+					   <div class="inc"></div>
 					</div>
 
 				</div>
@@ -75,6 +80,14 @@
 			})
 		});
 
-
+		$("#append").click( function() {
+        $(".inc").append('<div class="controls"><input type="text"><a href="#" class="remove_this btn btn-danger">remove</a><br><br></div>');
+        return false;
+    	});
+    
+		$(document).on('click','a.remove_this',function() {
+		    $(this).parent().remove();
+		    return false;
+		});
 	</script>
 @endpush

@@ -16,7 +16,9 @@ class SubKelompokDataTable extends DataTable
     {
         return $this->datatables
             ->eloquent($this->query())
-            ->addColumn('action', 'path.to.action.view')
+            ->addColumn('action', '<a href="#" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>
+            <button class="btn btn-xs btn-danger" type="button" data-toggle="modal" data-target="#myModal" data-title="Delete User" data-message="Are you sure you want to delete this user ?"> <i class="glyphicon glyphicon-trash"></i> Delete
+            </button>')
             ->make(true);
     }
 
@@ -42,7 +44,7 @@ class SubKelompokDataTable extends DataTable
         return $this->builder()
                     ->columns($this->getColumns())
                     ->ajax('')
-                    ->addAction(['width' => '80px'])
+                    ->addAction(['width' => '150px'])
                     ->parameters($this->getBuilderParameters());
     }
 
