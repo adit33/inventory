@@ -81,7 +81,7 @@
 		});
 
 		$("#append").click( function() {
-        $(".inc").append('<div class="controls"><input type="text"><a href="#" class="remove_this btn btn-danger">remove</a><br><br></div>');
+        $(".inc").append("<div class='controls'><input type='text'><a href='#' class='remove_this btn btn-danger'>remove</a><br><br></div>");
         return false;
     	});
     

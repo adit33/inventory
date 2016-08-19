@@ -3,9 +3,9 @@
         <!-- Logo -->
         <a href="index2.html" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
-          <span class="logo-mini"><b>UKM</b></span>
+          <span class="logo-mini"><b>Inv</b></span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg">Usaha Kecil Menengah</span>
+          <span class="logo-lg">Inventory</span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
