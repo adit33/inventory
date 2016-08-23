@@ -8,6 +8,11 @@
 
 				  Password Confirmation:<?php echo Form::password('password_confirmation',array('class'=>'form-control','id'=>'password_confirmation')); ?>
 
+
+					Asal Tempat : <?php echo Form::select('id',App\Lokasi::lists('nama','id'),null,['class'=>'form-control js-example-basic-single','placeholder'=>'']); ?>
+
+			
+
 				  Role :<?php echo Form::select('role',App\Role::lists('namaRole','namaRole'),null,['class'=>'form-control','id'=>'namaRole']); ?>
 
 				  <input type="file" name="foto" id="foto"></input>

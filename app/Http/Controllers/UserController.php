@@ -12,6 +12,7 @@ use Session;
 use Image;
 use App\DataTables\UserDataTable;
 
+
 class UserController extends Controller
 {
     /**
@@ -33,8 +34,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $users=User::all();
-        return View('user.create',['users'=>$users]);
+        return View('user.create');
     }
 
     /**
