@@ -12,6 +12,10 @@
 */
 use App\permission;
 
+Route::get('coba',function(){
+    return Session::get('barang');
+});
+
 Route::get('/', function () {
 	$lokasis=DB::table('lokasi')->get();
     $config = array();
@@ -63,6 +67,8 @@ Route::resource('lokasi','LokasiController');
 Route::get('subkelompok',['uses'=>'SubKelompokController@index','as'=>'sub.index']);
 
 Route::get('peminjaman/create',['uses'=>'PeminjamanController@create','as'=>'peminjaman.create']);
+
+Route::POST('peminjaman/addcart',['uses'=>'PeminjamanController@addCart','as'=>'cart.add']);
 
 Route::get('get_id_sub_kelompok',['uses'=>'SubKelompokController@getSubKelompok','as'=>'subkelompok.getid']);
 

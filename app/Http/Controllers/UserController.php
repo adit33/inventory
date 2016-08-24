@@ -60,6 +60,7 @@ class UserController extends Controller
             'userId'=>$request->input('userId'),
             'namaUser'=>$request->input('namaUser'),
             'password'=>bcrypt($request->input('password')),
+            'id_lokasi'=>$request->input('id_lokasi'),
             'foto'=>$image
             ]);
         $user->assignRole($request->input('role'));
@@ -130,6 +131,7 @@ class UserController extends Controller
             $user->userId=$request->input('userId');
             $user->namaUser=$request->input('namaUser');
             $user->password=bcrypt($request->input('password'));
+            $user->id_lokasi=$request->input('id_lokasi');
             $user->save();
             $user->assignRole($role);
         }
@@ -137,6 +139,7 @@ class UserController extends Controller
             $user->userId=$request->input('userId');
             $user->namaUser=$request->input('namaUser');
             $user->password=bcrypt($request->input('password'));
+            $user->id_lokasi=$request->input('id_lokasi');
             // $user->save();
             $user->assignRole($role);
         }

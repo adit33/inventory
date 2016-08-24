@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Session;
 
 class PeminjamanController extends Controller
 {
@@ -27,6 +28,18 @@ class PeminjamanController extends Controller
     public function create()
     {
         return View('peminjaman.create');
+    }
+
+    public function addCart(Request $request)
+    {
+        $data=[
+            'session_id'=>$request->session()->getId(),
+            'id_sub'=>$request->input('id_sub'),
+            'jumlah'=>$request->input('jumlah')
+        ];
+        $request->session()->push('barang',$data);
+
+        return redirect()->back();
     }
 
     /**

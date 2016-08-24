@@ -9,7 +9,7 @@
 				  Password Confirmation:<?php echo Form::password('password_confirmation',array('class'=>'form-control','id'=>'password_confirmation')); ?>
 
 
-					Asal Tempat : <?php echo Form::select('id',App\Lokasi::lists('nama','id'),null,['class'=>'form-control js-example-basic-single','placeholder'=>'']); ?>
+					Asal Tempat : <?php echo Form::select('id_lokasi',App\Lokasi::lists('nama','id'),null,['class'=>'form-control js-example-basic-single','placeholder'=>'']); ?>
 
 			
 

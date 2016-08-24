@@ -6,33 +6,53 @@
 		<div class="box-body">
 			<div class="form-group">
 				<div class="col-sm-12">
+					{!! Form::open(['url'=>route('cart.add'),'method'=>'POST']) !!}
+					<div>
+					Kelompok :{!! Form::select('id_kelompok',App\Kelompok::lists('nama_kelompok','id_kelompok'),null,['class'=>'form-control js-example-basic-single','id'=>'id_kelompok','placeholder'=>'Pilih']) !!} </div>
+				
+					<div>
+						Sub Kelompok :{!! Form::select('id_sub',[],null,['id'=>'id_sub','class'=>'form-control js-example-basic-single','placeholder'=>'Pilih']) !!} 
+					</div>
 					
-					<div class="col-md-6">
-					Kelompok :{!! Form::select('id_kelompok',App\Kelompok::lists('nama_kelompok','id_kelompok'),null,['class'=>'form-control js-example-basic-single','id'=>'id_kelompok','placeholder'=>'Pilih']) !!} <br>
-					</div>
 
-					<div class="col-md-4">
-					Sub Kelompok :{!! Form::select('id_sub',[],null,['id'=>'id_sub','class'=>'form-control js-example-basic-single','placeholder'=>'Pilih']) !!} <br>
-					</div>
-
-					<div id="stok" class="col-md-2">
+					<div id="stok"
+					>
 	
 					</div>
 
-					<div class="col-md-6">
-					Peminjam : {!! Form::select('id',App\Lokasi::lists('nama','id'),null,['class'=>'form-control js-example-basic-single','placeholder'=>'']) !!}
-					</div>
-					
-					<div class="col-md-2">
+					<div>
+
 					Jumlah :{!! Form::text('jumlah',null,['class'=>'form-control']) !!}
 					</div>
-
-					<div class="col-md-2">
-					<button class="btn btn-info" type="submit" id="append" name="append">Tambah Barang</button>
-					   <div class="inc"></div>
-					</div>
-
+			
+<hr>
+				<input type="submit" class='btn btn-info' value="Simpan"></input>
+	{!! Form::close() !!}
 				</div>
+
+				<div class="col-sm-12">
+					@if(Session::get('barang'))
+
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th>Nama</th>
+								<th>Jumlah</th>
+							</tr>
+							</thead>
+							<tbody>
+								<tr>
+									@foreach(Session::get('barang') as $barang)
+										<td>{!! $barang['id_sub'] !!}</td>
+										<td>{!! $barang['jumlah'] !!}</td>
+									@endforeach
+								</tr>
+							</tbody>
+						</table>
+
+					@endif
+				</div>
+
 			</div>
 		</div>
 	</div>

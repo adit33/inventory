@@ -207,6 +207,7 @@ return [
         'PDF'       => Barryvdh\DomPDF\Facade::class,
         'Image'     => Intervention\Image\Facades\Image::class,
         'Gmaps'     => 'GeneaLabs\Phpgmaps\Facades\PhpgmapsFacade',
+        'Crt'    => App\Helpers\CartHelpers::class
     ],
 
 ];
