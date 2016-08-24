@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use Session;
+use App\Peminjaman;
+use App\DataTables\SubKelompokDataTable;
+use App\SubKelompok,Auth;
+use Session,Cart,Validator;
+use App\Library\Autonumber;
+use DB;
 
 class PeminjamanController extends Controller
 {
@@ -15,6 +20,7 @@ class PeminjamanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+   
     public function index()
     {
         //
@@ -25,21 +31,21 @@ class PeminjamanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(SubKelompokDataTable $dataTable)
     {
-        return View('peminjaman.create');
+        return $dataTable->render('peminjaman.create');
     }
 
-    public function addCart(Request $request)
+    public function getSubKelompok(Request $request)
     {
-        $data=[
-            'session_id'=>$request->session()->getId(),
-            'id_sub'=>$request->input('id_sub'),
-            'jumlah'=>$request->input('jumlah')
-        ];
-        $request->session()->push('barang',$data);
+        $id=$request->input('id');
+        $subkelompok=SubKelompok::find($id);
+        $this->addCart($subkelompok);
+    }
 
-        return redirect()->back();
+    public function addCart($data)
+    {
+        Cart::add($data->id_sub,$data->nama_sub,1,0);
     }
 
     /**
@@ -50,8 +56,58 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $pinjam = new Peminjaman;
+        $carts=Cart::content();
+        $id=$request->input('id');
+        $rowid=$request->input('rowid');
+        $jumlah=$request->input('jumlah');
+        $barang=DB::table('subKelompok');
+        $kodePinjam=$pinjam->getKodePeminjaman();
+
+        $stok=DB::table('subKelompok')->whereIn('id_sub',$id)->lists('stock');
+        $nama=DB::table('subKelompok')->whereIn('id_sub',$id)->lists('nama_sub','id_sub');
+            foreach($jumlah as $key => $val)
+              {           
+                $jumlah['jumlah'.$key]=$jumlah[$key];
+                $idx=array_search($key, $stok);
+                $stok['stok'.$idx]=$stok[$idx];          
+                $rules['jumlah'.$key] = 'required|numeric|max:'.$stok[$idx];
+                $messages['jumlah'.$key.'.max'] = 'jumlah pinjam barang "'.$nama[$key].'" melebihi stok yang ada.';
+                $messages['jumlah'.$key.'.required'] = 'jumlah pinjam barang "'.$nama[$key].'" harus di isi.';
+             }
+  
+        $validator = Validator::make($jumlah,$rules,$messages);
+       if ($validator->fails())
+        {
+           return redirect()->back()->withErrors($validator)->withInput();
+        }
+        else{
+           
+
+                 Peminjaman::create([
+                        'id'=>$kodePinjam,
+                        'user_id'=>Auth::user()->userId,
+                        'is_return'=>'false'
+                    ]);
+
+                 foreach($carts as $cart){
+                    DB::table('detail_peminjaman')->insert(
+                            ['id_sub'=>$cart->id,
+                             'jumlah'=>$jumlah[$cart->id],
+                             'id_peminjaman'=>$kodePinjam
+                            ]
+                        );
+
+                    $barangs=DB::table('subKelompok')->where('id_sub','=',$cart->id)->get();       
+                    foreach($barangs as $brg){
+                        DB::table('subKelompok')->where('id_sub','=',$cart->id)->update(['stock'=>(($brg->stock)-($jumlah[$cart->id]))]);                  
+                        }    
+                    }
+            Cart::destroy();
+           
+                } 
+            return redirect()->back();    
+            }
 
     /**
      * Display the specified resource.

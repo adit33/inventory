@@ -13,7 +13,7 @@
 use App\permission;
 
 Route::get('coba',function(){
-    return Session::get('barang');
+   return dd(DB::table('subKelompok')->whereIn('id_sub',[5,2,1,3])->lists('nama_sub','id_sub'));
 });
 
 Route::get('/', function () {
@@ -67,6 +67,8 @@ Route::resource('lokasi','LokasiController');
 Route::get('subkelompok',['uses'=>'SubKelompokController@index','as'=>'sub.index']);
 
 Route::get('peminjaman/create',['uses'=>'PeminjamanController@create','as'=>'peminjaman.create']);
+Route::POST('peminjaman/store',['uses'=>'PeminjamanController@store','as'=>'peminjaman.store']);
+Route::get('peminjaman/getsubkelompok',['uses'=>'PeminjamanController@getSubKelompok','as'=>'get.sub']);
 
 Route::POST('peminjaman/addcart',['uses'=>'PeminjamanController@addCart','as'=>'cart.add']);
 
@@ -86,6 +88,8 @@ Route::POST('suplier/store',['uses'=>'SuplierController@store','as'=>'suplier.st
 Route::POST('penjualan/store',['uses'=>'PenjualanController@store','as'=>'penjualan.store']);
 Route::get('penjualan/create',['uses'=>'PenjualanController@create']);
 Route::get('penjualan/apibarang',['uses'=>'PenjualanController@apiBarang','as'=>'penjualan.data']);
+
+
 Route::get('penjualan/getId',['uses'=>'PenjualanController@getId']);
 ROute::get('penjualan/cart',['uses'=>'PenjualanController@datacart','as'=>'cart.data']);
 Route::get('penjualan/deletecart',['uses'=>'PenjualanController@deletecart']);
