@@ -17,7 +17,14 @@ Route::get('coba',function(){
 });
 
 Route::get('/', function () {
-	$lokasis=DB::table('lokasi')->get();
+	// $lokasis=DB::table('lokasi')
+ //    ->join('peminjaman','lokasi.id','=','peminjaman.id_lokasi','left outer')
+ //    ->join('detail_peminjaman','peminjaman.id','=','detail_peminjaman.id_peminjaman','left outer')
+ //    ->get();
+    $lokasis=App\Lokasi::with('peminjaman','peminjaman.detailPeminjaman.subKelompok')->get();
+
+    
+
     $config = array();
     $config['zoom'] = 'auto';
     $config['center'] = 'auto';
@@ -34,12 +41,33 @@ Route::get('/', function () {
     // set up the marker ready for positioning
     // once we know the users location
 
+    // foreach ($lokasis as $lokasi) {
+    // 	$marker = array();
+    // 	$marker['position']=$lokasi->lat.','.$lokasi->lang;
+    // 	$marker['infowindow_content']=$lokasi->nama."<hr><strong>Alamat : parung halang<br><strong>Kode Pos : </strong> 40375 <br><strong>Telp : </strong> 089656234771";
+    // 	Gmaps::add_marker($marker);
+    // }
+$data_sub=[];
+$marker = array();
     foreach ($lokasis as $lokasi) {
-    	$marker = array();
-    	$marker['position']=$lokasi->lat.','.$lokasi->lang;
-    	$marker['infowindow_content']=$lokasi->nama."<hr><strong>Alamat : parung halang<br><strong>Kode Pos : </strong> 40375 <br><strong>Telp : </strong> 089656234771";
-    	Gmaps::add_marker($marker);
+        $x[$lokasi->id]=null;
+        foreach ($lokasi->peminjaman as $peminjaman) {
+            foreach ($peminjaman->detailPeminjaman as $subkelompok) {
+            $data_sub[]='<hr><strong>'.$subkelompok->subkelompok->nama_sub.' jumlah pinjam '.$subkelompok->jumlah.'</strong><br>';
+            $data[$lokasi->id]=implode("",$data_sub);              
+            }
+        }
     }
+
+    $sub=$data+$x;
+
+    foreach ($lokasis as $lokasi) {
+        $marker['position']=$lokasi->lat.','.$lokasi->lang;
+        $marker['infowindow_content']=$lokasi->nama.$sub[$lokasi->id];  
+        Gmaps::add_marker($marker);
+    
+    }
+
 
     $map = Gmaps::create_map();
     echo "<html><head>

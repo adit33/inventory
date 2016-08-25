@@ -11,11 +11,16 @@ class Peminjaman extends Model
 	protected $primaryKey='id';
 	protected $fillable=['id','user_id','is_return'];
 
-     public function getKodePeminjaman(){
+    public function getKodePeminjaman(){
         $table="peminjaman";
         $primary="id";
         $prefix="PNJ-";
         $kodeBarang=Autonumber::autonumber($table,$primary,$prefix);
         return $kodeBarang;
+    }
+
+    public function detailPeminjaman()
+    {
+    	return $this->hasMany(DetailPeminjaman::class,'id_peminjaman');
     }
 }
