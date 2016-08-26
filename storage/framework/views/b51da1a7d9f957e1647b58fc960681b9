@@ -1,0 +1,27 @@
+<?php $__env->startSection('content'); ?>
+	<section class="content">
+	<div class="box box-primary">
+		<div class="box-body">
+			<div class="form-group">
+				<div class="col-sm-12">
+					No Peminjaman : <?php echo $peminjaman->id; ?> <br>
+					Tanggal Pinjam :<?php echo $peminjaman->created_at; ?><br>
+					Lokasi :<?php echo $peminjaman->lokasi->nama; ?>
+
+
+					<hr>
+
+					<?php foreach($peminjaman->detailPeminjaman as $sub): ?>
+
+					<?php echo dd($sub->subKelompok); ?> <br>
+
+					<?php endforeach; ?>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

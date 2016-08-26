@@ -23,4 +23,16 @@ class Peminjaman extends Model
     {
     	return $this->hasMany(DetailPeminjaman::class,'id_peminjaman');
     }
+
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class,'id_lokasi');
+    }
+
+    public function sumJumlah()
+	{
+	    return $this->detailPeminjaman()
+	      ->selectRaw('sum(jumlah) as jumlah')
+	      ->groupBy('id_sub');
+	}
 }

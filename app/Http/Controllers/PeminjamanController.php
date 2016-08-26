@@ -12,6 +12,7 @@ use App\SubKelompok,Auth;
 use Session,Cart,Validator;
 use App\Library\Autonumber;
 use DB;
+use App\DataTables\PeminjamanDataTable;
 
 class PeminjamanController extends Controller
 {
@@ -21,9 +22,9 @@ class PeminjamanController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-    public function index()
+    public function index(PeminjamanDataTable $dataTable)
     {
-        //
+       return $dataTable->render('peminjaman.index');
     }
 
     /**

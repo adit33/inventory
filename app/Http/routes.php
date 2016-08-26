@@ -21,9 +21,13 @@ Route::get('/', function () {
  //    ->join('peminjaman','lokasi.id','=','peminjaman.id_lokasi','left outer')
  //    ->join('detail_peminjaman','peminjaman.id','=','detail_peminjaman.id_peminjaman','left outer')
  //    ->get();
-    $lokasis=App\Lokasi::with('peminjaman','peminjaman.detailPeminjaman.subKelompok')->get();
-
-    
+    $lokasis=App\Lokasi::with(['peminjaman','peminjaman'=> function ($query){
+        $query->where('is_approve','=','false');
+    },
+    'peminjaman.detailPeminjaman'=>function($query){
+        $query->groupBy('id_sub');
+    },
+    'peminjaman.detailPeminjaman.subKelompok'])->get();
 
     $config = array();
     $config['zoom'] = 'auto';
@@ -51,21 +55,25 @@ $data_sub=[];
 $marker = array();
     foreach ($lokasis as $lokasi) {
         $x[$lokasi->id]=null;
+        $data[$lokasi->id]=null;
         foreach ($lokasi->peminjaman as $peminjaman) {
+             if($peminjaman == null){$data[$lokasi->id]=null;}
+             $jumlah=$peminjaman->first()->sumJumlah;
             foreach ($peminjaman->detailPeminjaman as $subkelompok) {
-            $data_sub[]='<hr><strong>'.$subkelompok->subkelompok->nama_sub.' jumlah pinjam '.$subkelompok->jumlah.'</strong><br>';
-            $data[$lokasi->id]=implode("",$data_sub);              
+            $data_sub[]='<hr><strong>'.$subkelompok->subkelompok->nama_sub.' jumlah pinjam '.$jumlah.'</strong><br>';
+                    $data[$lokasi->id]=implode("",$data_sub);   
+                 //   echo dd($jumlah);                  
             }
         }
     }
 
+    // echo dd($data);
     $sub=$data+$x;
 
     foreach ($lokasis as $lokasi) {
         $marker['position']=$lokasi->lat.','.$lokasi->lang;
         $marker['infowindow_content']=$lokasi->nama.$sub[$lokasi->id];  
         Gmaps::add_marker($marker);
-    
     }
 
 
@@ -94,9 +102,11 @@ Route::resource('lokasi','LokasiController');
 
 Route::get('subkelompok',['uses'=>'SubKelompokController@index','as'=>'sub.index']);
 
+Route::get('peminjaman',['uses'=>'PeminjamanController@index','as'=>'peminjaman.index']);
 Route::get('peminjaman/create',['uses'=>'PeminjamanController@create','as'=>'peminjaman.create']);
 Route::POST('peminjaman/store',['uses'=>'PeminjamanController@store','as'=>'peminjaman.store']);
 Route::get('peminjaman/getsubkelompok',['uses'=>'PeminjamanController@getSubKelompok','as'=>'get.sub']);
+Route::get('peminjaman/view/{id}',['uses'=>'PeminjamanController@show','as'=>'peminjaman.view']);
 
 Route::POST('peminjaman/addcart',['uses'=>'PeminjamanController@addCart','as'=>'cart.add']);
 
