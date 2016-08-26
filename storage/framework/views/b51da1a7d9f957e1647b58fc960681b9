@@ -6,14 +6,14 @@
 				<div class="col-sm-12">
 					No Peminjaman : <?php echo $peminjaman->id; ?> <br>
 					Tanggal Pinjam :<?php echo $peminjaman->created_at; ?><br>
-					Lokasi :<?php echo $peminjaman->lokasi->nama; ?>
-
+					Lokasi :<?php echo $peminjaman->lokasi->nama; ?><br>
+					Status : <?php echo $peminjaman->is_approve; ?>
 
 					<hr>
 
 					<?php foreach($peminjaman->detailPeminjaman as $sub): ?>
 
-					<?php echo dd($sub->subKelompok); ?> <br>
+					<?php echo $sub->subKelompok->nama_sub; ?> Jumlah <?php echo $sub->jumlah; ?> <br>
 
 					<?php endforeach; ?>
 

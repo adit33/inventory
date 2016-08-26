@@ -118,7 +118,8 @@ class PeminjamanController extends Controller
      */
     public function show($id)
     {
-        //
+        $peminjaman=Peminjaman::with('lokasi','detailPeminjaman','detailPeminjaman.subKelompok')->first();
+        return View('peminjaman.view',compact('peminjaman'));
     }
 
     /**

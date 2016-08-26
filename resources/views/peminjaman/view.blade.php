@@ -8,13 +8,13 @@
 				<div class="col-sm-12">
 					No Peminjaman : {!! $peminjaman->id !!} <br>
 					Tanggal Pinjam :{!! $peminjaman->created_at  !!}<br>
-					Lokasi :{!! $peminjaman->lokasi->nama  !!}
-
+					Lokasi :{!! $peminjaman->lokasi->nama  !!}<br>
+					Status : {!! $peminjaman->is_approve !!}
 					<hr>
 
 					@foreach($peminjaman->detailPeminjaman as $sub)
 
-					{!! dd($sub->subKelompok) !!} <br>
+					{!! $sub->subKelompok->nama_sub !!} Jumlah {!! $sub->jumlah !!} <br>
 
 					@endforeach
 
