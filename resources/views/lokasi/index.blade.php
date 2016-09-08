@@ -6,10 +6,14 @@
 		<div class="box-body">
 			<div class="form-group">
 				<div class="col-sm-12">
-					@include('lokasi._form')
+					{!! $dataTable->table() !!}
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 @endsection
+
+@push('scripts')
+	{!! $dataTable->scripts() !!}
+@endpush

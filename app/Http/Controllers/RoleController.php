@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Role;
 use App\Permission;
+use App\DataTables\RoleDataTable;
 
 class RoleController extends Controller
 {
@@ -16,9 +17,9 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(RoleDataTable $dataTable)
     {
-        //
+        return $dataTable->render('user.index');
     }
 
     /**

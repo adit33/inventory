@@ -1,0 +1,21 @@
+<?php $__env->startSection('content'); ?>
+
+<section class="content">
+<div class="box box-primary">
+
+<div class="box-header"><h1>Permission</h1></div> 	
+<div class="box-body">
+	<?php echo $dataTable->table(); ?>      
+</div>
+</div>
+</section>
+   
+<script src="<?php echo e(asset('/lib/angular/angular.min.js')); ?>" type="text/javascript"></script>   
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+	<?php echo $dataTable->scripts(); ?>
+
+<?php $__env->appendSection(); ?>
+
+<?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

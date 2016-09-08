@@ -4,7 +4,7 @@
           <!-- Sidebar user panel -->
           <div class="user-panel">
             <div class="pull-left image">
-              <img src="<?php echo e(asset(Auth::user()->foto)); ?>" class="img-circle" alt="User Image" />
+              <img src="<?php echo asset(Auth::user()->foto); ?>" class="img-circle" alt="User Image" />
             </div>
             <div class="pull-left info">
               <p><?php echo Auth::user()->namaUser;; ?></p>
@@ -27,10 +27,11 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo e(URL::to('/user/create')); ?>"><i class="fa fa-circle-o"></i>User</a></li>
-                <li><a href="<?php echo e(URL::to('/barang')); ?>"><i class="fa fa-circle-o"></i>Barang</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>Suplier</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i>Pelanggan</a></li>
+                <li><a href="<?php echo e(URL::to('user')); ?>"><i class="fa fa-circle-o"></i>User</a></li>
+                <li><a href="<?php echo e(URL::to('role')); ?>"><i class="fa fa-circle-o"></i>Role</a></li>
+                <li><a href="<?php echo e(URL::to('permisson')); ?>"><i class="fa fa-circle-o"></i>Permission</a></li>
+                <li><a href="<?php echo e(URL::to('subkelompok')); ?>"><i class="fa fa-circle-o"></i>Barang</a></li>
+                <li><a href="<?php echo e(URL::to('/')); ?>"><i class="fa fa-circle-o"></i>Lokasi</a></li>
               </ul>
             </li>
 
@@ -41,8 +42,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="<?php echo e(URL::to('/penjualan')); ?>"><i class="fa fa-circle-o"></i>Penjualan</a></li>
-                <li><a href="<?php echo e(URL::to('/barang')); ?>"><i class="fa fa-circle-o"></i>Pembelian</a></li>
+                <li><a href="<?php echo e(URL::to('/peminjaman/create')); ?>"><i class="fa fa-circle-o"></i>Peminjaman Barang</a></li>
+                <li><a href="<?php echo e(URL::to('peminjaman')); ?>"><i class="fa fa-circle-o"></i>Approve Peminjaman</a></li>
               </ul>
             </li>
             <li class="treeview">

@@ -8,12 +8,17 @@
 <div class="box-body">
       <div class="col-md-12">
 <hr>
+User ID : <?php echo Auth::user()->userId; ?><br>
+Nama : <?php echo Auth::user()->namaUser; ?><br>
+Lokasi :<?php echo Auth::user()->lokasi->nama; ?>
+
+<hr>
 
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal1"><i class="fa fa-plus"></i> Tambah Barang
       </button>
     <hr>
    
-        <?php if(count($errors) > 0): ?>
+<?php if(count($errors) > 0): ?>
     <div class="alert alert-danger">
         <ul>
             <?php foreach($errors->all() as $error): ?>

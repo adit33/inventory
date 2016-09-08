@@ -7,21 +7,28 @@
 	<table class="uk-table uk-table-striped">
 					<thead>
 						<tr>
-						<th>No Faktur</th>
-						<th>Nama Pelanggan</th>
+						<th>No Peminjaman</th>
+						<th>Lokasi Peminjam</th>
 						<th>Tanggal</th>
+						<th>Barang</th>
+						<th>Jumlah</th>
 					
 					</tr>
 					
 					</thead>
 					<tbody>	
 					<?php foreach($datas as $data): ?>
-					<tr>
-						<td><?php echo $data->kodeJual; ?></td>
-						<td><?php echo $data->r_pelanggan->namaPelanggan; ?></td>
-						<td><?php echo $data->tgl; ?></td>
 					
+						<?php foreach($data->detailPeminjaman as $pnj): ?>
+					<tr>
+						<td><?php echo $data->id; ?></td>
+						<td><?php echo $data->lokasi->nama; ?></td>
+						<td><?php echo $data->created_at; ?></td>
+						<td><?php echo $pnj->subKelompok->nama_sub; ?></td>
+						<td><?php echo $pnj->jumlah; ?></td>
 					</tr>
+						<?php endforeach; ?>
+					
 					<?php endforeach; ?>
 					</tbody>	
 	</table>

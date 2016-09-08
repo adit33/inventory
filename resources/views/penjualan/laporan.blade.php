@@ -19,11 +19,6 @@
 					    	<span class="input-group-addon">Sampai</span>
 					    <input type="text" class="input-sm form-control" id="end" name="end" />
 					</div>
-
-					<select class="form-control" name="jenisLaporan">
-						<option value="penjualan">Penjualan</option>
-						<option value="pembelian">Pembelian</option>
-					</select>
 					
 					<center><img src="{{asset('/lib/img/loading.gif')}}"  id="loading"></img></center>
 					<div id="data"></div>
@@ -79,13 +74,9 @@ $("#loading").hide();
 	      beforeSend:function(){
 	      	$('#loading').show();
 	  	  },
-	      success:function(data){
-
+	  	  success:function(data){
     		$("#loading").hide();
 	      	$("#data").append("<iframe src="+this.url+" height='100%' width='100%'></iframe>");
-// 	      	$iframe.ready(function() {
-//     $iframe.contents().find("body").html(data);
-// });
 	      }
 	    });
 	  });

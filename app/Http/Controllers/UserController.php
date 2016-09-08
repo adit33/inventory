@@ -10,6 +10,7 @@ use Auth;
 use App\User;
 use Session;
 use Image;
+use Crypt;
 use App\DataTables\UserDataTable;
 
 
@@ -22,8 +23,12 @@ class UserController extends Controller
      */
     public function index(UserDataTable $dataTable)
     {
-        $users=User::all();
-        return $dataTable->render('user.index');
+        if(Auth::user()->can('user.create')){
+            $users=User::all();
+            return $dataTable->render('user.index');
+
+        }
+            return redirect('404');
     }
 
     /**
@@ -34,7 +39,10 @@ class UserController extends Controller
 
     public function create()
     {
-        return View('user.create');
+        if(Auth::user()->can('user.create')){
+            return View('user.create');
+        }
+        return redirect('404');
     }
 
     /**
@@ -46,16 +54,24 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        $validator = Validator::make($data = $request->all(),User::$rules);
-        if ($validator->fails())
-        {
-            return response()->Json(array('errors'=>$validator->errors()->toArray()));
-        }
+        $this->validate($request, [
+            'userId' => 'required|string|max:255|unique:user,userId',
+            'id_lokasi' => 'required',
+            'password'=>'required|confirmed',
+            'password_confirmation'=>'required',
+            'role'=>'required'
+        ]);
 
         $foto=$request->file('foto');
+        
+        if($request->hasFile('foto')){
         $namafile=$foto->getClientOriginalName();
         Image::make($foto->getRealPath())->resize(215,215)->save('lib/img/' . $namafile);
-        $image='lib/img/'.$namafile;
+        $image='lib/img/'.$namafile;    
+        }else{
+            $image=null;
+        }
+
         $user=User::create([
             'userId'=>$request->input('userId'),
             'namaUser'=>$request->input('namaUser'),
@@ -64,6 +80,8 @@ class UserController extends Controller
             'foto'=>$image
             ]);
         $user->assignRole($request->input('role'));
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -85,14 +103,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //$users=User::with('r_role')->where('id','=',$id);
+        $id=Crypt::decrypt($id);
+        // $users=User::with('r_role')->where('userId','=',$id);
         $user=User::find($id);
-        foreach($user->r_role as $users)
-        $data=[
-            'users'=>$users,
-            'user'=>$user
-        ];
-        return $data;
+        $usr=$user->r_role;
+        foreach ($usr as $user_role) {
+        $user_role=$user_role->namaRole;
+        } 
+        
+        return view('user.edit',compact('user','user_role'));
     }
 
     /**
@@ -143,6 +162,8 @@ class UserController extends Controller
             // $user->save();
             $user->assignRole($role);
         }
+
+        return redirect()->route('user.index');
         
     }
 

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Permission;
+use App\DataTables\PermissionDataTable;
 use Route;
 class PermissionController extends Controller
 {
@@ -14,9 +16,9 @@ class PermissionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(PermissionDataTable $dataTable) 
     {
-        //
+        return $dataTable->render('permission.index');
     }
 
     /**
@@ -26,8 +28,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        $routes=Route::getRoutes();
-        return View('permission.create',compact('routes'));
+        return View('permission.create');
     }
 
     /**
@@ -38,7 +39,8 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Permission::create($request->all());
+        return redirect()->route('permission.index');
     }
 
     /**
@@ -60,7 +62,8 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $permission=Permission::find($id);
+        return View('permission.edit',compact('permission'));
     }
 
     /**

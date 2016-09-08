@@ -23,7 +23,7 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $table = 'user';
     public $incrementing = false;
-    protected $fillable = ['userId','namaUser', 'foto', 'password'];
+    protected $fillable = ['userId','namaUser', 'foto', 'password','id_lokasi'];
     public $timestamps=false;
     protected $primaryKey='userId';
     /**
@@ -47,6 +47,11 @@ public static $rules = [
     public function r_role()
     {
         return $this->belongsToMany(Role::class,'role_user','userId','role_id');
+    }
+
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class,'id_lokasi');
     }
 
     public function r_permission()

@@ -9,12 +9,16 @@
 <div class="box-body">
       <div class="col-md-12">
 <hr>
+User ID : {!! Auth::user()->userId !!}<br>
+Nama : {!! Auth::user()->namaUser !!}<br>
+Lokasi :{!! Auth::user()->lokasi->nama !!}
+<hr>
 
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal1"><i class="fa fa-plus"></i> Tambah Barang
       </button>
     <hr>
    
-        @if (count($errors) > 0)
+@if (count($errors) > 0)
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)

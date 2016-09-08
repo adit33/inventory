@@ -6,21 +6,28 @@
 	<table class="uk-table uk-table-striped">
 					<thead>
 						<tr>
-						<th>No Faktur</th>
-						<th>Nama Pelanggan</th>
+						<th>No Peminjaman</th>
+						<th>Lokasi Peminjam</th>
 						<th>Tanggal</th>
+						<th>Barang</th>
+						<th>Jumlah</th>
 					
 					</tr>
 					
 					</thead>
 					<tbody>	
 					@foreach($datas as $data)
-					<tr>
-						<td>{!! $data->kodeJual !!}</td>
-						<td>{!! $data->r_pelanggan->namaPelanggan !!}</td>
-						<td>{!! $data->tgl !!}</td>
 					
+						@foreach($data->detailPeminjaman as $pnj)
+					<tr>
+						<td>{!! $data->id !!}</td>
+						<td>{!! $data->lokasi->nama !!}</td>
+						<td>{!! $data->created_at !!}</td>
+						<td>{!! $pnj->subKelompok->nama_sub !!}</td>
+						<td>{!! $pnj->jumlah !!}</td>
 					</tr>
+						@endforeach
+					
 					@endforeach
 					</tbody>	
 	</table>

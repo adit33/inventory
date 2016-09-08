@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Lokasi;
 use App\Http\Controllers\Controller;
+use App\DataTables\LokasiDataTable;
 
 class LokasiController extends Controller
 {
@@ -14,9 +15,9 @@ class LokasiController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(LokasiDataTable $dataTable)
     {
-        //
+        return $dataTable->render('lokasi.index');
     }
 
     /**
@@ -65,7 +66,8 @@ class LokasiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lokasi=Lokasi::find($id);
+        return View('lokasi.edit',compact('lokasi'));
     }
 
     /**

@@ -1,16 +1,25 @@
-
-
 <?php $__env->startSection('content'); ?>
-<section class="content">
-	<div class="box box-primary">
+<?php echo Form::open(['url'=>route('user.store'),'files'=>'true']); ?>
+
+<div class="box box-primary">
 		<div class="box-body">
 			<div class="form-group">
-				<div class="col-sm-12">
+			<?php if(count($errors) > 0): ?>
+		    <div class="alert alert-danger">
+		        <ul>
+		            <?php foreach($errors->all() as $error): ?>
+		                <li><?php echo e($error); ?></li>
+		            <?php endforeach; ?>
+		        </ul>
+		    </div>
+			<?php endif; ?>
+				
 					<?php echo $__env->make('user._form', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-				</div>
+					<input type="submit" name="" value="Save" class="btn btn-primary">
 			</div>
 		</div>
-	</div>
-</section>
+</div>
+<?php echo Form::close(); ?>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layout.master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

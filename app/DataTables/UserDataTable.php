@@ -20,7 +20,7 @@ class UserDataTable extends DataTable
         return $this->datatables
             ->eloquent($this->query())
              ->addColumn('action', function($query){
-               return '<a href="'.URL::to("user/edit/".Crypt::encrypt($query->userId)).'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>'
+               return '<a href="'.URL::to("user/".Crypt::encrypt($query->userId)."/edit").'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>'
             .Form::open([
             "method" => "DELETE",
             "id"=>"form-delete",

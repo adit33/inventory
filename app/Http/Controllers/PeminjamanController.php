@@ -13,6 +13,8 @@ use Session,Cart,Validator;
 use App\Library\Autonumber;
 use DB;
 use App\DataTables\PeminjamanDataTable;
+use App\DetailPeminjaman;
+use PDF;
 
 class PeminjamanController extends Controller
 {
@@ -55,6 +57,24 @@ class PeminjamanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function returnSub($id)
+    {
+        $peminjaman=Peminjaman::find($id);
+        $peminjaman->is_return='true';
+        $peminjaman->save();
+        $pnjs=Peminjaman::with('detailPeminjaman')->where('id','=','PNJ-250816000001')->get();
+  
+    foreach($pnjs as $pnj){
+        foreach ($pnj->detailPeminjaman as $sub) {
+            DB::table('subKelompok')->where('id_sub','=',$sub->id_sub)->increment('stock',$sub->jumlah);                  
+        }
+    }
+
+     return redirect()->back();   
+
+    }
+
     public function store(Request $request)
     {
         $pinjam = new Peminjaman;
@@ -88,7 +108,9 @@ class PeminjamanController extends Controller
                  Peminjaman::create([
                         'id'=>$kodePinjam,
                         'user_id'=>Auth::user()->userId,
-                        'is_return'=>'false'
+                        'is_return'=>'false',
+                        'is_approve'=>'false',
+                        'id_lokasi'=>Auth::user()->id_lokasi
                     ]);
 
                  foreach($carts as $cart){
@@ -154,5 +176,51 @@ class PeminjamanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function approve($id)
+    {
+        $peminjaman=Peminjaman::find($id);
+        $peminjaman->is_approve='true';
+        $peminjaman->save();
+        // Peminjaman::update(['is_approve'=>'true'])
+        // ->where('id','=',$id);
+
+        return redirect()->back();
+
+    }
+
+    public function getlaporan(Request $request){
+           $tgl1=$request->input('start');
+           $tgl2=$request->input('end');
+          // $tabel='jual';      
+           $datas['datas']=Peminjaman::with('lokasi','detailPeminjaman.subKelompok')->whereBetween('created_at',[$tgl1,$tgl2])->get();
+           $datas['tgl1']=$tgl1;
+           $datas['tgl2']=$tgl2;
+           $pdf = PDF::loadView('penjualan.datalaporan',$datas);
+       return $pdf->download('laporan.pdf');
+    }
+
+    public function exportpdf(){
+        $pdf = PDF::loadView('penjualan.datalaporan');
+        return $pdf->download();
+    }
+
+    public function getdatachart(Request $request){
+        $tahun=$request->input('tahun');
+        $bulan=$request->input('bulan');    
+        $nama=[];
+        $jumlah=[];
+        $barangs=DetailPeminjaman::with(['peminjaman'=>function($query) use ($tahun,$bulan){
+                $query->where(DB::raw('YEAR(created_at)'),'=',$tahun)->whereMonth('created_at','=',$bulan); }])
+                 ->get();        
+       
+        foreach ($barangs as $barang){
+            array_push($nama,$barang->subKelompok->nama_sub);
+            array_push($jumlah,DetailPeminjaman::with(['peminjaman'=>function($query) use ($tahun,$bulan){
+                $query->where(DB::raw('YEAR(created_at)'),'=',$tahun)->whereMonth('created_at','=',$bulan);
+            }])->where('id_peminjaman','=',$barang->id_peminjaman)->sum('jumlah'));
+        }        
+        return View('datachart',compact('jumlah','nama'));
     }
 }

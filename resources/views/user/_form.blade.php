@@ -7,6 +7,13 @@
 
 					Asal Tempat : {!! Form::select('id_lokasi',App\Lokasi::lists('nama','id'),null,['class'=>'form-control js-example-basic-single','placeholder'=>'']) !!}
 			
+				<?php 
+					if (isset($user_role)) {
+						$role=$user_role;
+					}else{
+						$role=null;
+					}
+				 ?>
 
-				  Role :{!! Form::select('role',App\Role::lists('namaRole','namaRole'),null,['class'=>'form-control','id'=>'namaRole']) !!}
+				  Role :{!! Form::select('role',App\Role::lists('namaRole','namaRole'),$role,['class'=>'form-control','id'=>'namaRole','placeholder'=>'Pilih Role']) !!}
 				  <input type="file" name="foto" id="foto"></input>
